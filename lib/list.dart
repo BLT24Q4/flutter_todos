@@ -54,7 +54,7 @@ class _ListPageState extends State<_ListPage> {
     return FutureBuilder(
       future: todoListFuture, //  감시할 future 객체
       builder: (context, snapshot) {
-        print("snapshot: $snapshot");
+        // print("snapshot: $snapshot");
         //  상태 정보 체크
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
