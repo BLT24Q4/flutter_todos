@@ -135,7 +135,7 @@ class _ListPageState extends State<_ListPage> {
   Future<List<TodoItemVo>> getTodoList() async {
     try {
       //  요청
-      var dio = new Dio(); //  Dio 인스턴스
+      var dio = Dio(); //  Dio 인스턴스
       //  헤더 설정: 데이터를 json 형식으로 주고 받겠다는 약속
       dio.options.headers['Content-Type'] = "application/json";
       //  서버로 목록 요청
