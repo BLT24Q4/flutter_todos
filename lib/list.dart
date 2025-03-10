@@ -15,7 +15,8 @@ class ListPage extends StatelessWidget {
       body: Container(color: Colors.grey[100], child: _ListPage()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //  TODO: 작성 폼으로 이동
+          //  작성 폼으로 이동
+          Navigator.pushNamed(context, "/write");
         },
         child: Icon(Icons.add),
       ),
@@ -107,8 +108,16 @@ class _ListPageState extends State<_ListPage> {
                       ),
                       IconButton(
                         icon: Icon(Icons.delete),
-                        onPressed: () {
-                          //  TODO: 수정 폼으로 이동, 서버로 DELETE api 호출
+                        onPressed: () async {
+                          //  삭제 요청 함수 호출
+                          int deletedId = await deleteTodoItem(
+                            snapshot.data![index].id,
+                          );
+                          setState(() {
+                            snapshot.data!.removeWhere(
+                              (element) => element.id == deletedId,
+                            );
+                          });
                         },
                       ),
                     ],
@@ -182,6 +191,25 @@ class _ListPageState extends State<_ListPage> {
       }
     } catch (e) {
       throw Exception("TodoItem 상태를 변경하는데 실패 했습니다: $e");
+    }
+  }
+
+  //  TodoItem을 삭제하는 함수
+  Future<int> deleteTodoItem(int id) async {
+    try {
+      var dio = Dio();
+      dio.options.headers['Content-Type'] = 'application/json';
+
+      //  서버로 DELETE 요청
+      final response = await dio.delete("$API_ENDPOINT/$id");
+
+      if (response.statusCode == 200) {
+        return id;
+      } else {
+        throw Exception("API 서버 오류");
+      }
+    } catch (e) {
+      throw Exception('TodoItem 삭제에 실패했습니다.: $e');
     }
   }
 }
