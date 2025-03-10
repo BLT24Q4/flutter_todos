@@ -25,7 +25,7 @@ class _WriteForm extends StatefulWidget {
 
 class _WriteFormState extends State<_WriteForm> {
   //  상수
-  static const String API_ENDPOINT = "http://15.164.218.25:18088/api/todos";
+  static const String apiEndpoint = "http://15.164.218.25:18088/api/todos";
 
   final TextEditingController _titleController = TextEditingController();
   @override
@@ -65,7 +65,7 @@ class _WriteFormState extends State<_WriteForm> {
       dio.options.headers['Content-Type'] = 'application/json';
       //  POST 요청
       final response = await dio.post(
-        API_ENDPOINT,
+        apiEndpoint,
         data: {"title": _titleController.text, "completed": false},
       );
 
