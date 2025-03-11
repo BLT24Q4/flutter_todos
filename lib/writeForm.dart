@@ -25,7 +25,7 @@ class _WriteForm extends StatefulWidget {
 
 class _WriteFormState extends State<_WriteForm> {
   //  상수
-  static const String apiEndpoint = "http://15.164.218.25:18088/api/todos";
+  static const String apiEndpoint = "http://43.201.73.249:18088/api/todos";
 
   final TextEditingController _titleController = TextEditingController();
   @override

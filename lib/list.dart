@@ -33,7 +33,7 @@ class _ListPage extends StatefulWidget {
 
 class _ListPageState extends State<_ListPage> {
   //  상수
-  static const String apiEndpoint = "http://15.164.218.25:18088/api/todos";
+  static const String apiEndpoint = "http://43.201.73.249:18088/api/todos";
   //  상태 정의
   //  late : 선언시 할당하지 않고, 나중에 할당되는 변수
   late Future<List<TodoItemVo>> todoListFuture;
@@ -102,15 +102,16 @@ class _ListPageState extends State<_ListPage> {
                     children: <Widget>[
                       IconButton(
                         icon: Icon(Icons.edit),
-                        onPressed: () {
+                        onPressed: () async {
                           //  수정 폼으로 이동
-                          Navigator.pushNamed(
+                          await Navigator.pushNamed(
                             context,
                             "/edit",
                             arguments: {
                               "id": snapshot.data![index].id,
                             }, //  수정 페이지로 넘길 데이터 (map)
                           );
+                          setState(() {});
                         },
                       ),
                       IconButton(
